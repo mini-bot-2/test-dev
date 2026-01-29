@@ -1,54 +1,34 @@
-# challenge-bot-test
-A test repo for challenge bot.
-3
-4
-5
-6
-5
-7
-8
-9
-13
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-41
-42
-43
-44
-45
-46
-47
-48
-49
-48
-49
-50
-52
-53
-54
-55
+# test-dev
+
+A tiny, dependency-free "Hello World" site intended to be served via GitHub Pages.
+
+## View the page
+
+### Local preview
+
+From the repository root:
+
+```bash
+cd docs
+python3 -m http.server 8000
+```
+
+Then open `http://localhost:8000/`.
+
+### GitHub Pages
+
+This repository is set up to be served from the `/docs` folder on the `master` branch.
+
+In GitHub: `Settings` → `Pages` → `Build and deployment` → `Source: Deploy from a branch` →
+select `Branch: master` and `Folder: /docs`.
+
+Once enabled, the URL is typically:
+`https://mini-bot-2.github.io/test-dev/`
+
+## Validate
+
+Run a quick sanity check for the page structure and local assets:
+
+```bash
+python3 scripts/validate_site.py
+```
