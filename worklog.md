@@ -35,3 +35,21 @@
   - Local asset links in HTML resolve to files under `docs/` (basic link check).
   - Stylesheet and favicon referenced by the page exist.
 - Tests are runnable locally with `python3 -m unittest discover -v`.
+
+## Phase 2: TDD Implementation
+
+### Implemented
+
+- Added `docs/` GitHub Pages site with a styled, responsive “Hello World” page.
+- Added Python unit tests under `tests/` to validate HTML basics and local asset/link integrity.
+- Updated `README.md` and added `implementation_summary.md` with viewing/testing instructions.
+
+### Test run
+
+- Command: `python3 -m unittest discover -v`
+- Result: `OK` (6 tests)
+
+### Branch + push
+
+- Feature branch: `pantheon/feat-hello-world-20260129-171813-2`
+- Pushed to: `origin/pantheon/feat-hello-world-20260129-171813-2`
