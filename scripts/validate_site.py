@@ -8,13 +8,14 @@ import sys
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
+from typing import List, Optional, Tuple
 from urllib.parse import urlparse
 
 
 @dataclass(frozen=True)
 class Finding:
     message: str
-    context: str | None = None
+    context: Optional[str] = None
 
 
 class IndexHTMLParser(HTMLParser):
@@ -24,14 +25,16 @@ class IndexHTMLParser(HTMLParser):
         self._in_h1 = False
 
         self.title_text = ""
-        self.h1_texts: list[str] = []
-        self.meta_viewport_content: str | None = None
-        self.html_lang: str | None = None
-        self.meta_charset: str | None = None
+        self.h1_texts: List[str] = []
+        self.meta_viewport_content: Optional[str] = None
+        self.html_lang: Optional[str] = None
+        self.meta_charset: Optional[str] = None
 
-        self.resource_urls: list[tuple[str, str]] = []
+        self.resource_urls: List[Tuple[str, str]] = []
 
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+    def handle_starttag(
+        self, tag: str, attrs: List[Tuple[str, Optional[str]]]
+    ) -> None:
         attrs_dict = dict(attrs)
 
         if tag == "html":
@@ -75,7 +78,7 @@ def normalize_doc_ref(url: str) -> str:
 
 
 def validate_index_html(docs_dir: Path) -> list[Finding]:
-    findings: list[Finding] = []
+    findings: List[Finding] = []
 
     index_path = docs_dir / "index.html"
     if not index_path.exists():
@@ -115,9 +118,9 @@ def validate_index_html(docs_dir: Path) -> list[Finding]:
 
 
 def validate_resource_links(
-    docs_dir: Path, resource_urls: list[tuple[str, str]]
+    docs_dir: Path, resource_urls: List[Tuple[str, str]]
 ) -> list[Finding]:
-    findings: list[Finding] = []
+    findings: List[Finding] = []
 
     docs_root = docs_dir.resolve()
 
@@ -160,7 +163,7 @@ def validate_resource_links(
     return findings
 
 
-def main(argv: list[str]) -> int:
+def main(argv: List[str]) -> int:
     repo_root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description="Validate the docs/ GitHub Pages site")
     parser.add_argument(
